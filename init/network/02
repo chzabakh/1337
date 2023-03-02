@@ -1,0 +1,2 @@
+ifconfig en0
+ping -c2 10.12.255.255

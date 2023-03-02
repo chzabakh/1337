@@ -1,0 +1,2 @@
+to connect as new user with cli: first we logout if we are already connected to a user then welogin using ssh <user@ipaddress>
+to connect with gui: we click on the lock icon then log in as another user

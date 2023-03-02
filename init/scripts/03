@@ -1,0 +1,21 @@
+clear
+echo -e '\E[33m'"-------------------------------------- System Infos --------------------------------------\n"
+echo -e '\E[35m'"System last boot time :\t\t" '\E[32m' `who -b | cut -d't' -f3`
+echo -e '\E[35m'"Operating System Type :\t\t" '\E[32m' `uname -o`
+echo -e '\E[35m'"Operating System version :\t" '\E[32m' `cat /etc/debian_version`
+echo -e '\E[35m'"Hostname :\t\t\t" '\E[32m' `hostname`
+echo -e '\E[35m'"Dns server address :\t\t" '\E[32m' `cat /etc/resolv.conf | grep nameserver | cut -d' ' -f2`
+echo -e '\E[35m' "Internal Ip Address :\t\t" '\E[32m' `hostname -I`
+echo -e '\E[35m' "External Ip Address :\t\t" '\E[32m' `curl -s ipecho.net/plain;echo`
+free -h | grep total > /tmp/ramcache
+free -h | grep Mem > /tmp/ramcache2
+df -h | grep Filesystem > /tmp/diskusage
+df -h | grep -v Filesystem > /tmp/diskusage2
+echo -e '\E[35m'"\nRam usage :" '\E[34m'
+cat /tmp/ramcache
+echo -e '\E[0m'
+cat /tmp/ramcache2
+echo -e '\E[35m'"\nDisk usage :\n" '\E[34m'
+cat /tmp/diskusage
+echo -e '\E[0m'
+cat /tmp/diskusage2
