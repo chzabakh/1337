@@ -1,0 +1,1 @@
+go to sign in, forgot password, inspect and change email

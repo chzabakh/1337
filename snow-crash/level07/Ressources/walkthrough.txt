@@ -1,0 +1,9 @@
+su level07
+password: wiok45aaoguiboiki2tuin6ub
+
+scp -P 4242 level07@10.12.100.78:/home/user/level07/level07 .
+password: wiok45aaoguiboiki2tuin6ub
+
+LOGNAME='`getflag`'
+
+token: fiumuikeil55xe9cu4dood66h

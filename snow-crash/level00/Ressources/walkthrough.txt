@@ -1,0 +1,13 @@
+su level00
+level00
+find / -user flag00
+cat /usr/sbin/john         :     cdiiddwpgswtgt
+https://www.dcode.fr/cipher-identifier
+we choose the suggested rot cypher and try to decrypt the code
+
+Answer: NOTTOOHARDHERE => nottoohardhere
+
+su flag00
+password: nottoohardhere
+
+getflag =>   x24ti5gi3x0ol2eh4esiuxias

@@ -1,0 +1,16 @@
+wget -m -r -linf -k -p -q -E -e robots=off http://10.12.100.159/.hidden
+find . -name "README" -exec cat {} + > res
+vim res and /^[^DNT]
+sed -n 15695p res
+
+
+
+
+robots.txt file tells search engine crawlers which URLs the crawler can
+access on your site.
+
+
+protection:
+
+block indexing or password-protect the page.
+

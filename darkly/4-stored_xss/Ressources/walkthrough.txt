@@ -1,0 +1,11 @@
+in feedback page :
+name: <
+message: <
+
+
+
+Stored XSS are all about getting a malicious parameter reflected to the user.
+
+
+the straightforward approach to avoid XSS vulnerabilities is
+to sanitize user data and handle inputs safely.

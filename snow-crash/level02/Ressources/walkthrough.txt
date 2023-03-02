@@ -1,0 +1,17 @@
+su level02
+f2av5il02puano7naaf6adaaf
+
+ls => level02.pcap
+we found a packet capture file, we can analyse it with wireshark
+
+scp -P 4242 level02@10.12.100.78:/home/user/level02/level02.pcap ~/Desktop
+password: f2av5il02puano7naaf6adaaf
+
+chmod 777 level02.pcap
+open wireshark and load the capture
+analyze->follow->tcp stream
+Password: ft_wandr...NDRel.L0L -> ft_waNDReL0L
+su flag02
+password: ft_waNDReL0L
+getflag
+kooda2puivaav1idi4f57q8iq

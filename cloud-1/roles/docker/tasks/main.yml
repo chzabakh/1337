@@ -1,0 +1,36 @@
+---
+# tasks file for docker
+- name: Update Cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install dependencies for Docker
+  apt:
+    name: "{{ packages_dependencies }}"
+    state: present
+    update_cache: yes
+
+- name: Add  signing key for Docker
+  apt_key:
+    url: "{{ apt_key }}"
+    state: present
+
+- name: Add  Key repository for stable version
+  apt_repository:
+    repo: "{{ apt_repository }}"
+    state: present
+
+- name: Update apt and install docker-ce
+  apt: update_cache=yes name=docker-ce state=latest
+
+- name: Install Docker Module for Python
+  pip:
+      name: docker
+     
+- name: Add user to docker group
+  user:
+    name: root
+    group: docker
+
+
+     
+ 

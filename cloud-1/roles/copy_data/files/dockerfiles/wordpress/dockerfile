@@ -1,0 +1,16 @@
+FROM wordpress:latest
+RUN apt-get update
+RUN apt-get install -y git
+RUN rm -rf /docker_folders && git clone https://github.com/chzabakh/docker_folders /docker_folders
+RUN chmod -R 700 /docker_folders
+RUN rm /etc/apache2/sites-available/000-default.conf
+RUN rm /etc/apache2/sites-available/default-ssl.conf
+RUN cp /docker_folders/folders/aph/000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN cp /docker_folders/folders/aph/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+# RUN sed -i -e "s/nigga/$HOST_IP/g" /etc/apache2/sites-avai
+RUN a2enmod ssl && a2ensite default-ssl && service apache2 stop && service apache2 start
+# ENTRYPOINT sh
+
+
+
+

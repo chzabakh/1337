@@ -1,0 +1,13 @@
+go to /robots.txxt
+go to /whatever
+reverse md5 the password
+go to /admin and login with root dragon
+
+
+robots.txt file tells search engine crawlers which URLs the crawler can
+access on your site.
+
+
+protection:
+
+block indexing or password-protect the page.

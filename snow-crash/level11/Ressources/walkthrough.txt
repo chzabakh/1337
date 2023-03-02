@@ -1,0 +1,7 @@
+su level11  feulo4b72j7edeahuete3no7c
+
+nc 127.0.0.1 5151
+
+`getflag > /tmp/flag`
+
+fa6v5ateaw21peobuub8ipe6s

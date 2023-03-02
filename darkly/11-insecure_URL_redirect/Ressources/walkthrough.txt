@@ -1,0 +1,12 @@
+inspect fb link and change it.
+
+
+If your site permits open redirects, you may be unknowingly helping attackers
+take advantage of your user base.
+
+
+prevention:
+
+-Disallow Offsite Redirects
+
+-Check the Referrer When Doing Redirects

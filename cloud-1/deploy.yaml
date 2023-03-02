@@ -1,0 +1,8 @@
+---
+- name: deploy 
+  hosts: all
+  
+  roles:
+    - docker
+    - copy_data
+    - run_containers

@@ -1,0 +1,25 @@
+inspect and change false to true
+
+false : 68934a3e9455fa72420237eb05902327
+true  : b326b5062b2f0e69046810717534cb09
+
+
+
+
+Session Hijacking attack consists of the exploitation of the web session
+control mechanism, which is normally managed for a session token.
+
+
+prevention:
+
+-HTTPOnly: Setting up an HTTPOnly attribute prevents access to the stored
+cookies from the client-side scripts. This can prevent attackers from
+deploying XSS attacks that rely on injecting Java Scripts in the browser.
+
+-Identity Verification: Perform additional identity verification from the user
+beyond the session key. This includes checking the user's usual IP address or
+application usage patterns.
+
+-Session cookies are a way of overcoming these constraints and allowing
+web applications to identify individual computer systems and store
+the current session state.

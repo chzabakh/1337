@@ -1,0 +1,1 @@
+inspect survey and change a vote value

@@ -1,0 +1,77 @@
+---
+- name: copy data from server to nodes
+  copy:
+    src: ../files/
+    dest: /root/temp
+    owner: root
+    group: root
+
+- name: create volume for wp-app
+  docker_volume:
+    name: wp-app
+
+- name: create a volume for wp-data
+  docker_volume:
+    name: wp-data
+
+- name: copy data to the wp-app volume 
+  command: docker run --rm -v wp-app:/recover -v /root/temp/backup:/backup ubuntu bash  -c " cd /recover && tar xvf /backup/wp-app.tar"
+
+- name: copy data to the wp-data volume 
+  command: docker run --rm -v wp-data:/recover -v /root/temp/backup:/backup ubuntu bash -c " cd /recover && tar xvf /backup/wp-data.tar"
+
+
+- name:  remove ubuntu image 
+  docker_image:
+    name: ubuntu
+    force_absent: yes
+    state: absent
+
+
+- name:  remove mysql image
+  docker_image:
+    name: cloud-mysql:1
+    force_absent: yes
+    state: absent
+
+- name:  remove wordpres image 
+  docker_image:
+    name: cloud-wordpress:1
+    force_absent: yes
+    state: absent
+
+- name:  remove phpmyadmin image 
+  docker_image:
+    name: cloud-phpmyadmin:1
+    force_absent: yes
+    state: absent
+
+- name: build mysql image
+  docker_image:
+    name: cloud-mysql:1
+    build:
+      path: /root/temp/dockerfiles/mysql/
+    
+    state: present
+    source: build
+    
+
+- name: env
+  shell: export HOST_IP="{{ inventory_hostname }}"
+- name: build wordpress image
+  docker_image:
+    name: cloud-wordpress:1
+    build:
+      path: /root/temp/dockerfiles/wordpress/
+      args:
+        HOST_IP: "{{ inventory_hostname }}"
+    state: present
+    source: build
+   
+- name: build phpmyadmin image
+  docker_image:
+    name: cloud-phpmyadmin:1
+    build:
+      path: /root/temp/dockerfiles/phpmyadmin/
+    state: present
+    source: build

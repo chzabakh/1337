@@ -1,0 +1,14 @@
+we send a request with curl so that the server thinks it's comming from "ft_bornToSec" browser and went to the website from nsa.gov
+curl --user-agent 'ft_bornToSec' --referer "https://www.nsa.gov/" "10.12.100.159/?page=e43ad1fdc54babe674da7c7b8f0127bde61de3fbe01def7d00f151c2fcca6d1c"
+
+
+spoofing is assuming another identity so that the server get tricked to think
+you are a different person.
+
+protection:
+
+- captcha.
+
+- verify requests.
+
+- log activities to make it easy to detect suspecious actions.

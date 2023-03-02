@@ -1,0 +1,72 @@
+version: '3.7'
+services:
+
+
+    mariadb:
+        container_name: mdb
+        image: "mariadb"
+        restart: on-failure
+        build: ./requirements/mariadb/
+        volumes:
+            - mdb_files:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: "${MYSQL_DATABASE}"
+            MYSQL_USER: "${MYSQL_USER}"
+            MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+            MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+        ports:
+            - "3306:3306"
+        networks:
+            - my_network
+
+
+    wordpress:
+        container_name: wp
+        image: "wordpress"
+        restart: on-failure
+        build: ./requirements/wordpress/
+        volumes:
+           - wp_files:/var/www/html
+        depends_on:
+            - mariadb
+        environment:
+            WORDPRESS_DB_HOST: "${WORDPRESS_DB_HOST}"
+            WORDPRESS_DB_NAME: "${WORDPRESS_DB_NAME}"
+            WORDPRESS_DB_USER: "${WORDPRESS_DB_USER}"
+            WORDPRESS_DB_PASSWORD: "${WORDPRESS_DB_PASSWORD}"
+        ports:
+            - "9000:9000"
+        networks:
+            - my_network
+
+
+    nginx:
+        container_name: ngx
+        image: "nginx"
+        restart: on-failure
+        build: ./requirements/nginx/
+        volumes:
+           - wp_files:/var/www/html
+        depends_on:
+            - wordpress
+        ports:
+            - "443:443"
+        networks:
+            - my_network
+
+
+networks:
+  my_network:
+    name: inception
+    driver: bridge
+volumes:
+    wp_files:
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: '/home/chzabakh/data/wp-ngx'
+    mdb_files:
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: '/home/chzabakh/data/mariadb'

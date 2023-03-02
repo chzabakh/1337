@@ -1,0 +1,19 @@
+su level14   2A31L79asukciNyi8uppkEuSx
+
+b * 0x804898e
+run main
+print $eax
+set $eax=0
+b * 0x8048b0a
+c
+disass
+print $eax
+set $eax=3014
+c
+
+Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
+
+su flag14
+
+getflag
+Congratulation. Type getflag to get the key and send it to me the owner of this livecd :)

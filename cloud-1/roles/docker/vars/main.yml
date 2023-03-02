@@ -1,0 +1,15 @@
+---
+# vars file for docker
+
+packages_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - gnupg-agent
+  - python3-setuptools
+  - python3-pip
+  - virtualenv
+apt_key: https://download.docker.com/linux/ubuntu/gpg
+apt_repository: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+

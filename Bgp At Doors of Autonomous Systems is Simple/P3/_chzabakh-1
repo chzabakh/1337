@@ -1,0 +1,25 @@
+sed -i -e 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons
+sed -i -e 's/ospfd=no/ospfd=yes/g' /etc/frr/daemons
+
+vtysh
+configure terminal
+
+int eth0
+ip add 10.1.1.1/30
+int eth1
+ip add 10.1.1.5/30
+int eth2
+ip add 10.1.1.9/30
+int lo
+ip add 1.1.1.1/32
+router bgp 1
+neighbor ibgp peer-group
+neighbor ibgp remote-as 1
+neighbor ibgp update-source lo
+bgp listen range 1.1.1.0/29 peer-group ibgp
+address-family l2vpn evpn
+neighbor ibgp activate
+neighbor ibgp route-reflector-client
+exit-address-family
+router ospf
+network 0.0.0.0/0 area 0

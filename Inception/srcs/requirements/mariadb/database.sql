@@ -1,0 +1,5 @@
+CREATE DATABASE mydb;
+CREATE USER 'chzabakh'@'%' IDENTIFIED BY 'chzabakh';
+GRANT ALL PRIVILEGES ON mydb.* TO 'chzabakh'@'%' IDENTIFIED BY 'chzabakh';
+FLUSH PRIVILEGES;
+

