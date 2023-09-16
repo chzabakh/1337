@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    restart: on-failure
+    networks:
+      - net1
+
+  frontend:
+    build: frontend/
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - net1
+    restart: on-failure
+    depends_on:
+      - backend
+  
+  backend:
+    build: backend/
+    container_name: backend
+    ports:
+      - "9000:9000"
+    networks:
+      - net1
+    restart: on-failure
+    depends_on:
+      - postgres
+
+networks:
+  net1:

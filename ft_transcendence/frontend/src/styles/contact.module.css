@@ -1,0 +1,82 @@
+.container
+{
+  display: flex;
+  align-items: center;
+  gap : 200px;
+  justify-content: center;
+  /* background-color: blue; */
+}
+.form
+{
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  flex-direction: column;
+  width: 40%;
+  height: 500px;
+
+}
+
+.imge {
+  height: 50%;
+  width :500px;
+}
+
+.input
+{
+     padding: 1rem;
+     color: aliceblue;
+     height: 3rem;
+     border-radius: 40px;
+     border : none;
+     background-color: rgb(33, 33, 33);
+     box-shadow:1px 6px 4px 3px hwb(184 48% 7%);
+     border: none;
+     outline: none;
+     transition: transform 0.3s;
+
+}
+
+.text
+{
+     width:100%;
+     resize: vertical;
+     padding:15px;
+     border-radius:15px;
+     border:0;
+     background-color: rgb(33, 33, 33);
+     box-shadow:1px 6px 4px 3px hwb(184 48% 7%);
+     height:150px;
+     color: white;
+     transition: transform 0.3s;
+}
+
+.input:focus
+{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    box-shadow:1px 6px 4px 3px hwb(286 48% 7%);
+    transition: 200ms;
+    transform: scale(1.03);
+}
+
+.text:focus
+{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    box-shadow:1px 6px 4px 3px hwb(286 48% 7%);
+    transition: 200ms;
+    transform: scale(1.03);
+}
+
+.input:placeholder
+{
+    color: beige;
+    letter-spacing: 10px;
+}
+
+.text::placeholder{
+    letter-spacing: 1px;
+}

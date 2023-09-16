@@ -1,0 +1,183 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// generator erd {
+//   provider = "prisma-erd-generator"
+// }
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email    String @unique
+  nickname String @unique
+
+  hash String
+
+  TwofaAutSecret  String?
+  TwofaAutEnabled Boolean? @default(false)
+
+  FirstLogin Boolean? @default(true)
+
+  avatarUrl String? @default("default_avatar.png")
+  isChanged Boolean @default(false)
+
+  state     String  @default("offline")
+  provider  String?
+
+  room      Room[]
+  roomOwner Room[] @relation("roomOwner")
+  opedroom  Room[] @relation("AdminRooms")
+
+  SentMessage     Message[] @relation("sender")
+
+  sentFriendRequests     FriendRequest[] @relation("SentFriendRequest")
+  receivedFriendRequests FriendRequest[] @relation("ReceivedFriendRequest")
+
+  sentFriends     Friend[] @relation("sentFriends")
+  receivedFriends Friend[] @relation("receivedFriends")
+
+  blockedUsers   BlockedUser[] @relation("userBlockedUsers")
+  usersBlockedBy BlockedUser[] @relation("blockedUserBlockedUsers")
+
+  friendStatus  String? @default("None")
+  seenMessages  Message[]
+
+  matchesAsPlayer1 Match[] @relation("Player1Matches")
+  matchesAsPlayer2 Match[] @relation("Player2Matches")
+  matchesAsWinner Match[] @relation("WinnerMatches")
+
+  invitePlayer1 GameInvite? @relation("Player1Invite")
+  invitePlayer2 GameInvite? @relation("Player2Invite")
+
+  isMuted Room[] @relation("mutedUsers")
+  isBanned Room[] @relation("bannedUsers")
+}
+
+model Room {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  lastMessageAt DateTime @default(now())
+
+  name      String? @unique
+  isPrivate Boolean?
+  isPrivateKey String? @unique
+  isProtected Boolean?
+  isGroup   Boolean?
+  password  String?
+  isChannel Boolean?
+
+  uid String @unique
+  admins User[] @relation("AdminRooms")
+
+  owner   User? @relation(name: "roomOwner", fields: [ownerID], references: [id])
+  ownerID Int?
+
+  users    User[]
+  messages Message[]
+
+  mutedUsers User[] @relation("mutedUsers")
+  bannedUsers User[] @relation("bannedUsers")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  content String
+
+  room   Room @relation(fields: [roomID], references: [uid])
+  roomID String
+
+  sender   User @relation(name: "sender", fields: [senderID], references: [id])
+  senderID Int
+
+  seen     User[]
+}
+
+model FriendRequest {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sender   User @relation("SentFriendRequest", fields: [senderID], references: [id])
+  senderID Int
+
+  recipient   User @relation("ReceivedFriendRequest", fields: [recipientID], references: [id])
+  recipientID Int
+
+  friendRequestStatus String   @default("Pending")
+}
+
+model Friend {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sentBy   User @relation("sentFriends", fields: [sentByID], references: [id])
+  sentByID Int
+
+  receivedBy   User @relation("receivedFriends", fields: [receivedByID], references: [id])
+  receivedByID Int
+}
+
+model BlockedUser {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User @relation("userBlockedUsers", fields: [userID], references: [id])
+  userID Int  @unique
+
+  blockedUser   User @relation("blockedUserBlockedUsers", fields: [blockedUserID], references: [id])
+  blockedUserID Int  @unique
+}
+
+model BlockedTokens {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  token String? @unique
+}
+
+model Match {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  player1   User    @relation("Player1Matches", fields: [player1Id], references: [id])
+  player1Id Int
+
+  player2   User    @relation("Player2Matches", fields: [player2Id], references: [id])
+  player2Id Int
+
+  winner    User?   @relation("WinnerMatches", fields: [winnerId], references: [id])
+  winnerId  Int?
+
+  player1Score     Int?
+  player2Score     Int?
+}
+
+model GameInvite {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  player1   User    @relation("Player1Invite", fields: [player1Id], references: [id])
+  player1Id Int @unique
+
+  player2   User    @relation("Player2Invite", fields: [player2Id], references: [id])
+  player2Id Int @unique
+}
